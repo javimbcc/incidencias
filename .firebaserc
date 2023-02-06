@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "incidencias-3c103"
+  },
+  "targets": {
+    "incidencias-3c103": {
+      "hosting": {
+        "app-incidencias": [
+          "incidencias-3c103"
+        ]
+      }
+    }
+  }
+}

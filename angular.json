@@ -91,8 +91,21 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "app-incidencias:build:production",
+            "firebaseProject": "incidencias-3c103",
+            "firebaseHostingSite": "incidencias-3c103"
+          }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
