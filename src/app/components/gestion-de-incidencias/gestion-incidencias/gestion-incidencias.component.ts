@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Auth } from 'firebase/auth';
 import { CrudService } from 'src/app/services/crud.service';
 
 @Component({
@@ -31,5 +32,6 @@ export class GestionIncidenciasComponent {
 
   ngOnInit() {
     this.getTodosLosClientes();
+    this.firebase.cogerRolUsuario("ejemplo@gmail.com");
   }
 }
