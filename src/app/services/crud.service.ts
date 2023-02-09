@@ -8,7 +8,7 @@ import { collection, query, where } from "firebase/firestore";
 })
 export class CrudService {
   //private auth: Auth
-   constructor(private firestore: AngularFirestore ) { }
+  constructor(private firestore: AngularFirestore) { }
 
   cogerTodos(coleccion: string) {
     return this.firestore.collection(coleccion).snapshotChanges();
@@ -37,10 +37,10 @@ export class CrudService {
 
   //Metodo para recoger los roles de usuario del usuario registrado actualmente
   cogerRolUsuario(email: string) {
-    const query = this.firestore.collection("usuarios").ref.where("email","==",email);
+    const query = this.firestore.collection("usuarios").ref.where("email", "==", email);
     query.get().then(snapshot => {
       snapshot.forEach(value => {
-        console.log(value.data());
+        console.log(value.get("rol"))
       })
     });
   }
