@@ -2,6 +2,11 @@
   <h1 class="mt-4">Incidencias</h1>
 </div>
 
+<div class="text-center m-3">
+  <button (click)="ListarRevisadas()">No revisadas</button>
+  <!-- <button (click)="">Revisadas</button> -->
+</div>
+
 <div class="d-flex row-fluid mt-4 mx-3" *ngFor="let i of incidenciasLista">
   <div class="container shadow rounded p-4 justify-content-center">
     <div class="row text-center">

@@ -22,6 +22,7 @@ export class EditarIncidenciaComponent {
     descripcion: [],
     id: [],
     lugar: [],
+    estado: ["no revisada"],
   });
 
   EditarDatos() {

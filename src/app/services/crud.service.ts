@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
-import { collection, query, where } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CrudService {
   //private auth: Auth
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore, private auth: Auth) { }
 
   cogerTodos(coleccion: string) {
     return this.firestore.collection(coleccion).snapshotChanges();
@@ -31,9 +31,9 @@ export class CrudService {
   }
 
   //Metodo para loguearte con firebase AUTH
-  // login({ email, password }: any) {
-  //   return signInWithEmailAndPassword(this.auth, email, password);
-  // }
+  login({ email, password }: any) {
+    return signInWithEmailAndPassword(this.auth, email, password);
+  }
 
   //Metodo para recoger los roles de usuario del usuario registrado actualmente
   cogerRolUsuario(email: string) {
@@ -43,6 +43,16 @@ export class CrudService {
         console.log(value.get("rol"))
       })
     });
+  }
+
+  //Metodo para recoger los estados de las incidencias
+  async cogerEstadoIncidencia(coleccion: string,estado: string){
+    const query = this.firestore.collection("incidencias").ref.where("estado", "==", estado);
+    const querySnapshot = await getDocs(query);
+    querySnapshot.forEach((doc) => {
+      return doc.data()
+    });
+
   }
 
 

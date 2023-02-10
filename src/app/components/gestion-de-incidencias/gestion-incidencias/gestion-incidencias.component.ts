@@ -15,6 +15,15 @@ export class GestionIncidenciasComponent {
   incidenciasLista: any[] = [];
   documentId: string = '';
 
+
+  ListarRevisadas() {
+    this.firebase.cogerEstadoIncidencia(this.coleccion, "no-revisada");
+  }
+
+  ListarNoRevisadas() {
+    //this.firebase.cogerEstadoIncidencia("no-revisada")
+  }
+
   getTodosLosClientes() {
     this.firebase.cogerTodos(this.coleccion).subscribe(
       (resp: any) => {

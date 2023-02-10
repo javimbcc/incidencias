@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { CrudService } from 'src/app/services/crud.service';
 
 @Component({
@@ -7,11 +8,12 @@ import { CrudService } from 'src/app/services/crud.service';
   styleUrls: ['./login-screen.component.css']
 })
 export class LoginScreenComponent {
-  constructor(private service: CrudService) {}
+  @Output() formData: EventEmitter<{
+    email: string;
+    password: string;
+  }> = new EventEmitter();
+  constructor(private service: CrudService,private fb: FormBuilder) {}
 
-  //Metodo que implementa nuestro servicio con el metodo del login
 
-  login({ email, password }) {
-    //return this.service.login(email, password);
-  }
+
 }
