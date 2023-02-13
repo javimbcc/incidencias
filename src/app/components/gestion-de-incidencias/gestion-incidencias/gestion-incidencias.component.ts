@@ -16,12 +16,37 @@ export class GestionIncidenciasComponent {
   documentId: string = '';
 
 
+  //Boton que cambia los valores de la lista y muestra las revisadas
   ListarRevisadas() {
-    this.firebase.cogerEstadoIncidencia(this.coleccion, "no-revisada");
+    this.firebase.cogerEstadoIncidencia("revisada").subscribe(
+      (resp: any) => {
+        this.incidenciasLista = [];
+        resp.forEach((incidenciasSnapshot: any) => {
+          this.incidenciasLista.push(
+            {
+              ...incidenciasSnapshot.payload.doc.data(),
+              documentId: incidenciasSnapshot.payload.doc.id,
+            }
+          )
+        });
+      })
   }
 
+  //boton que cambia las listas y muestra las no revisadas
+
   ListarNoRevisadas() {
-    //this.firebase.cogerEstadoIncidencia("no-revisada")
+    this.firebase.cogerEstadoIncidencia("no-revisada").subscribe(
+      (resp: any) => {
+        this.incidenciasLista = [];
+        resp.forEach((incidenciasSnapshot: any) => {
+          this.incidenciasLista.push(
+            {
+              ...incidenciasSnapshot.payload.doc.data(),
+              documentId: incidenciasSnapshot.payload.doc.id,
+            }
+          )
+        });
+      })
   }
 
   getTodosLosClientes() {

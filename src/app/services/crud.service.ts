@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
 import { collection, getDocs, query, where } from "firebase/firestore";
+import { Firestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -46,13 +47,11 @@ export class CrudService {
   }
 
   //Metodo para recoger los estados de las incidencias
-  async cogerEstadoIncidencia(coleccion: string,estado: string){
-    const query = this.firestore.collection("incidencias").ref.where("estado", "==", estado);
-    const querySnapshot = await getDocs(query);
-    querySnapshot.forEach((doc) => {
-      return doc.data()
-    });
-
+   cogerEstadoIncidencia(estado: string) {
+   return  this.firestore.collection('incidencias', ref => ref.where("estado", "==", estado)).snapshotChanges()
+    // const query = this.firestore.collection("incidencias").ref.where();
+    // const querySnapshot = await getDocs(query);
+    //return querySnapshot;
   }
 
 

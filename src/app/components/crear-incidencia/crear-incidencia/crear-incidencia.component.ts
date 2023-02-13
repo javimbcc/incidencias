@@ -22,7 +22,7 @@ export class CrearIncidenciaComponent {
     lugar: [],
     descripcion: [],
     arreglo: [],
-    estado: ["no revisado"],
+    estado: ["no-revisada"],
   });
 
   crearIncidencias() {
