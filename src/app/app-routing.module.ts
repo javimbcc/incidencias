@@ -10,7 +10,8 @@ const routes: Routes = [
   { path: "menu", component: MenuComponent },
   //{ path: "login", component: LoginScreenComponent },
   { path: "gestion", component: GestionIncidenciasComponent },
-  { path: "**", redirectTo: "menu", pathMatch: 'full' }
+  { path: "login", component: LoginScreenComponent },
+  { path: "**", redirectTo: "login", pathMatch: 'full' }
 ];
 
 @NgModule({

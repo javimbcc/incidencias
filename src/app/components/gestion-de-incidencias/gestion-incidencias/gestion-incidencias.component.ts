@@ -15,6 +15,7 @@ export class GestionIncidenciasComponent {
   incidenciasLista: any[] = [];
   documentId: string = '';
   datosUsuario : any[];
+  correo = this.firebase.cogerEmail()
 
 
   //Boton que cambia los valores de la lista y muestra las revisadas
@@ -71,7 +72,7 @@ export class GestionIncidenciasComponent {
   //Metodo para coger el rol de usuario
 
   rolUsuario() {
-    this.firebase.cogerRolUsuario("ejemplo@gmail.com").subscribe(
+    this.firebase.cogerRolUsuario(this.correo).subscribe(
       (resp: any) => {
         this.datosUsuario = [];
         resp.forEach((usuarioSnapshot: any) => {
