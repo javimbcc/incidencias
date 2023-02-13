@@ -13,12 +13,14 @@ import { LoginScreenComponent } from './components/login-screen/login-screen.com
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
     LoginScreenComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

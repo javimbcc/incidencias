@@ -11,9 +11,9 @@ import { CrudService } from 'src/app/services/crud.service';
 })
 export class LoginScreenComponent {
 
-  constructor(private service: CrudService, private fb: FormBuilder, private afAuth: AngularFireAuth, private router: Router,) { }
+  constructor(private service: CrudService, private fb: FormBuilder, private afAuth: AngularFireAuth, private router: Router) { }
 
-  SignIn(email, password) {
+  Loguearse(email, password) {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
@@ -26,6 +26,7 @@ export class LoginScreenComponent {
         window.alert(error.message);
       });
   }
+  xd() {}
 
 
 }

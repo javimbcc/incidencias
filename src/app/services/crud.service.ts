@@ -51,7 +51,10 @@ export class CrudService {
     return user.email.toString();
   }
 
-  //LOGIN Y REGISTER
+  //Metodo para crear usuario
+  CrearUsuario(data: any) {
+    return this.firestore.collection("usuarios").add(data);
+  }
 
 
 }
