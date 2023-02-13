@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
+import { Auth, getAuth, onAuthStateChanged, signInWithEmailAndPassword } from '@angular/fire/auth';
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { Firestore } from '@angular/fire/firestore';
 
@@ -37,21 +37,17 @@ export class CrudService {
   }
 
   //Metodo para recoger los roles de usuario del usuario registrado actualmente
+  //recogemos el email del actual logeado en la aplicacion y dentro de su documento recogemos
+  //el apartado de rol
   cogerRolUsuario(email: string) {
-    const query = this.firestore.collection("usuarios").ref.where("email", "==", email);
-    query.get().then(snapshot => {
-      snapshot.forEach(value => {
-        console.log(value.get("rol"))
-      })
-    });
+    console.log(this.firestore.collection('usuarios', ref => ref.where("email", "==", email)).snapshotChanges());
+    return this.firestore.collection('usuarios', ref => ref.where("email", "==", email)).snapshotChanges()
   }
 
+
   //Metodo para recoger los estados de las incidencias
-   cogerEstadoIncidencia(estado: string) {
-   return  this.firestore.collection('incidencias', ref => ref.where("estado", "==", estado)).snapshotChanges()
-    // const query = this.firestore.collection("incidencias").ref.where();
-    // const querySnapshot = await getDocs(query);
-    //return querySnapshot;
+  cogerEstadoIncidencia(estado: string) {
+    return this.firestore.collection('incidencias', ref => ref.where("estado", "==", estado)).snapshotChanges()
   }
 
 

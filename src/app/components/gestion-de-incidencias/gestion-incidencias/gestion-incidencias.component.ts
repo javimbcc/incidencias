@@ -14,9 +14,11 @@ export class GestionIncidenciasComponent {
   coleccion = "incidencias";
   incidenciasLista: any[] = [];
   documentId: string = '';
+  datosUsuario : any[];
 
 
   //Boton que cambia los valores de la lista y muestra las revisadas
+
   ListarRevisadas() {
     this.firebase.cogerEstadoIncidencia("revisada").subscribe(
       (resp: any) => {
@@ -49,6 +51,8 @@ export class GestionIncidenciasComponent {
       })
   }
 
+  //Metodo para listar todas las incidencias creadas
+
   getTodosLosClientes() {
     this.firebase.cogerTodos(this.coleccion).subscribe(
       (resp: any) => {
@@ -64,8 +68,25 @@ export class GestionIncidenciasComponent {
       })
   }
 
+  //Metodo para coger el rol de usuario
+
+  rolUsuario() {
+    this.firebase.cogerRolUsuario("ejemplo@gmail.com").subscribe(
+      (resp: any) => {
+        this.datosUsuario = [];
+        resp.forEach((usuarioSnapshot: any) => {
+          this.datosUsuario.push(
+            {
+              ...usuarioSnapshot.payload.doc.data()
+            }
+          )
+        });
+        console.log(this.datosUsuario)
+      });
+  }
+
   ngOnInit() {
     this.getTodosLosClientes();
-    this.firebase.cogerRolUsuario("ejemplo@gmail.com");
+    this.rolUsuario()
   }
 }
