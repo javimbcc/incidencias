@@ -13,6 +13,7 @@ export class EditarIncidenciaComponent {
   coleccion: string = "incidencias";
   documentId: string = "";
   incidencia: any;
+  usuariosLista: any[] = []
 
   constructor(private firebase: CrudService, private fb: FormBuilder,
     private ruta: ActivatedRoute) { }
@@ -40,6 +41,23 @@ export class EditarIncidenciaComponent {
   Eliminar() {
     this.documentId = this.ruta.snapshot.paramMap.get('id')!;
     this.firebase.Eliminar(this.coleccion, this.documentId);
+  }
+
+  //Listado de los usuarios de la aplicacion para poder asignarles las tareas
+
+  ListarUsuarios() {
+    this.firebase.cogerTodos("usuarios").subscribe(
+      (resp: any) => {
+        this.usuariosLista = [];
+        resp.forEach((incidenciasSnapshot: any) => {
+          this.usuariosLista.push(
+            {
+              ...incidenciasSnapshot.payload.doc.data(),
+              documentId: incidenciasSnapshot.payload.doc.id,
+            }
+          )
+        });
+      })
   }
 
   ngOnInit() {
