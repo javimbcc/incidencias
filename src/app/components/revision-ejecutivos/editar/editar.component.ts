@@ -4,11 +4,11 @@ import { ActivatedRoute } from '@angular/router';
 import { CrudService } from 'src/app/services/crud.service';
 
 @Component({
-  selector: 'app-editar-incidencia',
-  templateUrl: './editar-incidencia.component.html',
-  styleUrls: ['./editar-incidencia.component.css']
+  selector: 'app-editar',
+  templateUrl: './editar.component.html',
+  styleUrls: ['./editar.component.css']
 })
-export class EditarIncidenciaComponent {
+export class EditarComponent {
   //Declaramos la coleccion de firebase, id, y el objeto en los que vamos a trabajar
   coleccion: string = "incidencias";
   documentId: string = "";

@@ -7,6 +7,7 @@ import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
   { path: "hacerIncidencia", loadChildren: () => import("./components/crear-incidencia/crear-incidencia.module").then(m => m.CrearIncidenciaModule) },
+  { path: "gestionEjecutivos", loadChildren: () => import("./components/revision-ejecutivos/revision-ejecutivos.module").then(m => m.RevisionEjecutivosModule) },
   { path: "gestionIncidencias", loadChildren: () => import("./components/gestion-de-incidencias/gestion-de-incidencias.module").then(m => m.GestionDeIncidenciasModule) },
   { path: "menu", component: MenuComponent },
   { path: "registro", component: RegisterComponent },

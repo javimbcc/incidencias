@@ -1,0 +1,63 @@
+<div class="text-center m-3">
+  <h1 class="mt-4">Incidencias</h1>
+</div>
+
+<div class="text-center m-3">
+  <button (click)="ListarRevisadas()">Revisadas</button>
+  <button (click)="ListarNoRevisadas()">No revisadas</button>
+  <button (click)="getTodosLosClientes()">Todas</button>
+</div>
+<!-- Coger el rol del usuario y dependiendo de este mostrar el editar o no -->
+
+<i *ngFor="let user of datosUsuario">
+  <div *ngIf="user.rol == 1">
+    <div class="d-flex row-fluid mt-4 mx-3" *ngFor="let i of incidenciasLista">
+      <div class="container shadow rounded p-4 justify-content-center">
+        <div class="row text-center">
+          <div class="col-md-1">
+            <h4>Estado: {{i.estado}}</h4>
+          </div>
+          <div class="col-sm-1">
+            <h4>Id: {{i.id}}</h4>
+          </div>
+          <div class="col-sm-2">
+            <h4>Lugar: {{i.lugar}}</h4>
+          </div>
+          <div class="col-sm-3">
+            <h4>Arreglo: {{i.arreglo}}</h4>
+          </div>
+          <div class="col-sm-4">
+            <h4>Descripcion: {{i.descripcion}}</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="user.rol == 2">
+    <div class="d-flex row-fluid mt-4 mx-3" *ngFor="let i of incidenciasLista">
+      <div class="container shadow rounded p-4 justify-content-center">
+        <div class="row text-center">
+          <div class="col-md-1">
+            <h4>Estado: {{i.estado}}</h4>
+          </div>
+          <div class="col-sm-1">
+            <h4>Id: {{i.id}}</h4>
+          </div>
+          <div class="col-sm-2">
+            <h4>Lugar: {{i.lugar}}</h4>
+          </div>
+          <div class="col-sm-3">
+            <h4>Arreglo: {{i.arreglo}}</h4>
+          </div>
+          <div class="col-sm-4">
+            <h4>Descripcion: {{i.descripcion}}</h4>
+          </div>
+          <div class="col-sm-1">
+            <a routerLink="editar/{{i.documentId}}">Editar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</i>
