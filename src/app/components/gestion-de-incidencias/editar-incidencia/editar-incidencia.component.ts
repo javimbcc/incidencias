@@ -13,17 +13,21 @@ export class EditarIncidenciaComponent {
   coleccion: string = "incidencias";
   documentId: string = "";
   incidencia: any;
+  opcion: string = "";
   usuariosLista: any[] = []
 
   constructor(private firebase: CrudService, private fb: FormBuilder,
     private ruta: ActivatedRoute) { }
+
+
+
 
   formIncidencias = this.fb.group({
     arreglo: [],
     descripcion: [],
     id: [],
     lugar: [],
-    estado: [],
+    estado: []
   });
 
   EditarDatos() {
@@ -35,7 +39,7 @@ export class EditarIncidenciaComponent {
   //Metodo para actualizar los datos del portero
   ActualizarDatos() {
     this.documentId = this.ruta.snapshot.paramMap.get('id')!;
-    this.firebase.Actualizar(this.coleccion, this.documentId, this.formIncidencias.value);
+    this.firebase.Actualizar(this.coleccion, this.documentId,this.formIncidencias.value);
   }
 
   Eliminar() {

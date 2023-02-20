@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RevisionEjecutivosRoutingModule } from './revision-ejecutivos-routing.module';
 import { EditarComponent } from './editar/editar.component';
 import { ListarComponent } from './listar/listar.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,7 +14,9 @@ import { ListarComponent } from './listar/listar.component';
   ],
   imports: [
     CommonModule,
-    RevisionEjecutivosRoutingModule
+    RevisionEjecutivosRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class RevisionEjecutivosModule { }

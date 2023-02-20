@@ -9,58 +9,62 @@ import { CrudService } from 'src/app/services/crud.service';
   styleUrls: ['./editar.component.css']
 })
 export class EditarComponent {
-  //Declaramos la coleccion de firebase, id, y el objeto en los que vamos a trabajar
-  coleccion: string = "incidencias";
-  documentId: string = "";
-  incidencia: any;
-  usuariosLista: any[] = []
+   //Declaramos la coleccion de firebase, id, y el objeto en los que vamos a trabajar
+   coleccion: string = "incidencias";
+   documentId: string = "";
+   incidencia: any;
+   opcion: string = "";
+   usuariosLista: any[] = []
 
-  constructor(private firebase: CrudService, private fb: FormBuilder,
-    private ruta: ActivatedRoute) { }
+   constructor(private firebase: CrudService, private fb: FormBuilder,
+     private ruta: ActivatedRoute) { }
 
-  formIncidencias = this.fb.group({
-    arreglo: [],
-    descripcion: [],
-    id: [],
-    lugar: [],
-    estado: [],
-  });
 
-  EditarDatos() {
-    this.documentId = this.ruta.snapshot.paramMap.get('id')!;
-    this.firebase.cogerUno(this.coleccion, this.documentId).subscribe((resp: any) => {
-      this.formIncidencias.setValue(resp.payload.data());
-    });
-  }
-  //Metodo para actualizar los datos del portero
-  ActualizarDatos() {
-    this.documentId = this.ruta.snapshot.paramMap.get('id')!;
-    this.firebase.Actualizar(this.coleccion, this.documentId, this.formIncidencias.value);
-  }
 
-  Eliminar() {
-    this.documentId = this.ruta.snapshot.paramMap.get('id')!;
-    this.firebase.Eliminar(this.coleccion, this.documentId);
-  }
 
-  //Listado de los usuarios de la aplicacion para poder asignarles las tareas
+   formIncidencias = this.fb.group({
+     arreglo: [],
+     descripcion: [],
+     id: [],
+     lugar: [],
+     estado: []
+   });
 
-  ListarUsuarios() {
-    this.firebase.cogerTodos("usuarios").subscribe(
-      (resp: any) => {
-        this.usuariosLista = [];
-        resp.forEach((incidenciasSnapshot: any) => {
-          this.usuariosLista.push(
-            {
-              ...incidenciasSnapshot.payload.doc.data(),
-              documentId: incidenciasSnapshot.payload.doc.id,
-            }
-          )
-        });
-      })
-  }
+   EditarDatos() {
+     this.documentId = this.ruta.snapshot.paramMap.get('id')!;
+     this.firebase.cogerUno(this.coleccion, this.documentId).subscribe((resp: any) => {
+       this.formIncidencias.setValue(resp.payload.data());
+     });
+   }
+   //Metodo para actualizar los datos del portero
+   ActualizarDatos() {
+     this.documentId = this.ruta.snapshot.paramMap.get('id')!;
+     this.firebase.Actualizar(this.coleccion, this.documentId,this.formIncidencias.value);
+   }
 
-  ngOnInit() {
-    this.EditarDatos();
-  }
+   Eliminar() {
+     this.documentId = this.ruta.snapshot.paramMap.get('id')!;
+     this.firebase.Eliminar(this.coleccion, this.documentId);
+   }
+
+   //Listado de los usuarios de la aplicacion para poder asignarles las tareas
+
+   ListarUsuarios() {
+     this.firebase.cogerTodos("usuarios").subscribe(
+       (resp: any) => {
+         this.usuariosLista = [];
+         resp.forEach((incidenciasSnapshot: any) => {
+           this.usuariosLista.push(
+             {
+               ...incidenciasSnapshot.payload.doc.data(),
+               documentId: incidenciasSnapshot.payload.doc.id,
+             }
+           )
+         });
+       })
+   }
+
+   ngOnInit() {
+     this.EditarDatos();
+   }
 }
