@@ -7,9 +7,9 @@ import { CrudService } from 'src/app/services/crud.service';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent {
-  datosUsuario : any[];
+  datosUsuario: any[];
   correo = this.firebase.cogerEmail()
-  constructor(private firebase: CrudService){}
+  constructor(private firebase: CrudService) { }
 
   //Metodo para coger el rol de usuario
 
@@ -20,14 +20,15 @@ export class MenuComponent {
         resp.forEach((usuarioSnapshot: any) => {
           this.datosUsuario.push(
             {
-              ...usuarioSnapshot.payload.doc.data()
+              ...usuarioSnapshot.payload.doc.data(),
+              documentId: usuarioSnapshot.payload.doc.id,
             }
           )
         });
-        console.log(this.datosUsuario)
       });
   }
+
   ngOnInit() {
-    this.rolUsuario()
+    this.rolUsuario();
   }
 }

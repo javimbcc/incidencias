@@ -3,13 +3,14 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Auth, getAuth, onAuthStateChanged, signInWithEmailAndPassword } from '@angular/fire/auth';
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { Firestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CrudService {
    authF = getAuth();
-  constructor(private firestore: AngularFirestore, private auth: Auth) { }
+  constructor(private firestore: AngularFirestore, private auth: Auth,private afAuth: AngularFireAuth) { }
 
   cogerTodos(coleccion: string) {
     return this.firestore.collection(coleccion).snapshotChanges();
@@ -35,8 +36,19 @@ export class CrudService {
   //recogemos el email del actual logeado en la aplicacion y dentro de su documento recogemos
   //el apartado de rol
   cogerRolUsuario(email: string) {
-    console.log(this.firestore.collection('usuarios', ref => ref.where("email", "==", email)).snapshotChanges());
     return this.firestore.collection('usuarios', ref => ref.where("email", "==", email)).snapshotChanges()
+  }
+
+  //Metodo si no esta registrado
+
+  noRegistro() {
+    this.afAuth.authState.subscribe((user) => {
+      if (!user) {
+        return false;
+      } else {
+        return true;
+      }
+    });
   }
 
   //Metodo para recoger los estados de las incidencias
@@ -49,6 +61,12 @@ export class CrudService {
   cogerEmail() {
     const user = this.authF.currentUser;
     return user.email.toString();
+  }
+
+  //Metodo para recoger el rol del usuario mediante el documentID
+
+  cogerRolDocID(documentId: string) {
+    return this.firestore.collection('usuarios').doc(documentId).valueChanges()
   }
 
   //Metodo para crear usuario
