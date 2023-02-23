@@ -5,22 +5,52 @@ import { GestionIncidenciasComponent } from './components/gestion-de-incidencias
 import { LoginScreenComponent } from './components/login-screen/login-screen.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthStateGuard } from './guards/auth-state.guard';
+import { MantenimientoAuthGuard } from './guards/mantenimiento-auth.guard';
 
 const routes: Routes = [
-  { path: "hacerIncidencia", loadChildren: () => import("./components/crear-incidencia/crear-incidencia.module").then(m => m.CrearIncidenciaModule) },
-  { path: "gestionEjecutivos", canActivate: [AuthStateGuard], loadChildren: () => import("./components/revision-ejecutivos/revision-ejecutivos.module").then(m => m.RevisionEjecutivosModule) },
-  { path: "gestionIncidencias", loadChildren: () => import("./components/gestion-de-incidencias/gestion-de-incidencias.module").then(m => m.GestionDeIncidenciasModule) },
-  { path: "menu", component: MenuComponent },
-  { path: "registro", component: RegisterComponent },
-  { path: "gestion", component: GestionIncidenciasComponent },
-  { path: "login", component: LoginScreenComponent },
-  { path: "**", redirectTo: "login", pathMatch: 'full' }
+  {
+    path: 'hacerIncidencia',
+    loadChildren: () =>
+      import('./components/crear-incidencia/crear-incidencia.module').then(
+        (m) => m.CrearIncidenciaModule
+      ),
+  },
+  {
+    path: 'gestionEjecutivos',
+    canActivate: [AuthStateGuard],
+    loadChildren: () =>
+      import(
+        './components/revision-ejecutivos/revision-ejecutivos.module'
+      ).then((m) => m.RevisionEjecutivosModule),
+  },
+  {
+    path: 'crudUsuario',
+    loadChildren: () =>
+      import('./components/usuario-crud/usuario-crud.module').then(
+        (m) => m.UsuarioCrudModule
+      ),
+  },
+  {
+    path: 'gestionIncidencias',
+    canActivate: [MantenimientoAuthGuard],
+    loadChildren: () =>
+      import(
+        './components/gestion-de-incidencias/gestion-de-incidencias.module'
+      ).then((m) => m.GestionDeIncidenciasModule),
+  },
+  { path: 'menu', component: MenuComponent },
+  { path: 'registro', component: RegisterComponent },
+  { path: 'gestion', component: GestionIncidenciasComponent },
+  { path: 'login', component: LoginScreenComponent },
+  { path: '**', redirectTo: 'login', pathMatch: 'full' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    preloadingStrategy: PreloadAllModules
-  })],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes, {
+      preloadingStrategy: PreloadAllModules,
+    }),
+  ],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

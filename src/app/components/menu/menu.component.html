@@ -12,7 +12,12 @@
       <div *ngIf="i.rol == 2">
         <a class="btn btn-primary" routerLink="/hacerIncidencia">Introducir incidencias</a>
         <a class="btn btn-primary" routerLink="/gestionEjecutivos">Gestion Ejecutivos</a>
+        <a class="btn btn-primary" routerLink="/crudUsuario">Crud Usuario</a>
       </div>
     </i>
   </div>
 </section>
+
+<div class="text-center">
+  <button (click)="CerrarSesion()" class="btn btn-primary">Cerrar sesion</button>
+</div>

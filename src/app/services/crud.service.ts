@@ -74,5 +74,11 @@ export class CrudService {
     return this.firestore.collection("usuarios").add(data);
   }
 
+  //Metodo para cerrar sesion
+
+  CerrarSesion() {
+    const user = this.auth.signOut();
+  }
+
 
 }
